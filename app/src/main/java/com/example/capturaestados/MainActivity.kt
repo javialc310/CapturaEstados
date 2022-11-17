@@ -3,6 +3,7 @@ package com.example.capturaestados
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
+import com.example.capturaestados.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private var onCreate=0
@@ -12,15 +13,15 @@ class MainActivity : AppCompatActivity() {
     private var onRestart=4
     private var onStop=5
     private var onDestroy=6
-    private lateinit var txtEmail:EditText
-    private lateinit var txtContra:EditText
+    private val binding = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         println("onCreate $onCreate")
-        txtEmail=findViewById(R.id.editTextTextCorreo)
-        txtContra=findViewById(R.id.editTextTextPassword)
+//        txtEmail=findViewById(R.id.editTextTextCorreo)
+//        txtContra=findViewById(R.id.editTextTextPassword)
+
     }
 
     override fun onStart() {
@@ -56,14 +57,14 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(savedInstanceState: Bundle){
         super.onSaveInstanceState(savedInstanceState)
 
-        savedInstanceState.putString("TAGEMAIL", txtEmail.text.toString())
-        savedInstanceState.putString("TAGCONTRA", txtContra.text.toString())
+        savedInstanceState.putString("TAGEMAIL", binding.editTextTextCorreo.text.toString())
+        savedInstanceState.putString("TAGCONTRA", binding.editTextTextPassword.text.toString())
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
 
-        txtEmail.setText(savedInstanceState.getString("TAGEMAIL"))
-        txtContra.setText(savedInstanceState.getString("TAGCONTRA"))
+        binding.editTextTextCorreo.setText(savedInstanceState.getString("TAGEMAIL"))
+        binding.editTextTextPassword.setText(savedInstanceState.getString("TAGCONTRA"))
     }
 }
